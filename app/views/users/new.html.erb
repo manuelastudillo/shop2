@@ -1,7 +1,10 @@
-<h1>Registration</h1>
+  <div class="container-fluid">
+
+<h1>Registración</h1>
 
 <%= form_for @user do |f| %>
   <%= render 'shared/errors', object: @user %>
+
   <div class="form-group">
     <%= f.label :nombre %>
     <%= f.text_field :nombre, class: 'form-control', required: true %>
@@ -17,7 +20,41 @@
   </div>
   <div class="form-group">
     <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
+    <%= f.text_field :password_confirmation, class: 'form-control', required: true %>
   </div>
-  <%= f.submit 'Register', class: 'btn btn-primary btn-lg' %>
-<% end %>
+
+  <div class="form-group">
+        <%= f.label :comuna,"Comuna:", :class => "col-md-2" %>
+        
+        <%= f.select('comuna_id', Comuna.all.collect{|d| [d.nombre, d.id]}, class: 'chosen-select') %>
+  </div>
+
+   <div class="form-group">
+    <%= f.label :calle %>
+    <%= f.text_field :calle, class: 'form-control', required: true %>
+  </div>
+
+   <div class="form-group">
+    <%= f.label :telefono %>
+    <%= f.text_field :telefono, class: 'form-control', required: true %>
+  </div>
+
+    <div class="form-group">
+    <%= f.label :fechaingreso %>
+    <%= f.date_select :fechaingreso, class: 'form-control', required: true %>
+  </div>
+
+ <div class="form-group">
+    <%= f.label :sueldo %>
+    <%= f.text_field :sueldo, class: 'form-control', required: true %>
+  </div>
+
+   <div class="form-group">
+    <%= f.label :rut %>
+    <%= f.text_field :rut, class: 'form-control', required: true %>
+  </div>
+
+  <%= f.submit 'Registrar', class: 'btn btn-primary btn-lg' %>
+  <% end %>
+</div>
+

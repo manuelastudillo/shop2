@@ -10,6 +10,15 @@ body {
   height: 100%;
 }
 
+.li > span {
+  display: block;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: #9d9d9d;
+}
+#footer{
+  margin-top: 60px;
+}
 
 body #new-detail-modal{
   width: 700px;

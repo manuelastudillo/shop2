@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  resources :units
+  resources :categories
+  resources :brands
   resources :brands
   root 'pages#index'
   get 'pages/index'

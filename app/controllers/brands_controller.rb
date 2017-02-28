@@ -3,23 +3,15 @@ class BrandsController < ApplicationController
 
   # GET /brands
   # GET /brands.json
- PAGE_SIZE = 5
+PAGE_SIZE = 5
 
- def index
-   @page = (params[:page] || 0).to_i
+def index
+ @page = (params[:page] || 0).to_i
+ @keywords = params[:keywords]
 
-   if params[:keywords].present?
-     @keywords = params[:keywords]
-     @brands = Brand.where("lower(nombre) LIKE '%#{@keywords.downcase}%'").order(:nombre)
-                    .offset(PAGE_SIZE * @page).limit(PAGE_SIZE)
-     number_of_records = Brand.where("lower(nombre) LIKE '%#{@keywords.downcase}%'").count
-   else
-     @brands = Brand.order(:nombre).offset(PAGE_SIZE * @page).limit(PAGE_SIZE)
-     number_of_records = Brand.count
-   end
-   @number_of_pages = (number_of_records % PAGE_SIZE) == 0 ? 
-                       number_of_records / PAGE_SIZE - 1 : number_of_records / PAGE_SIZE
- end
+ search = Search.new(@page, PAGE_SIZE, @keywords)
+ @brands, @number_of_pages = search.brands_by_nombre
+end
 
   # GET /brands/1
   # GET /brands/1.json
