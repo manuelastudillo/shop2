@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
   
+  resources :items
+  resources :proveedors
   resources :units
   resources :categories
   resources :brands
-  resources :brands
+ 
+get '/brands_suggestion', to: 'brands_suggestion#index'
+get '/validate_suggested_brand', to: 'validate_suggested_brand#index'
+
   root 'pages#index'
   get 'pages/index'
   get 'profile', to: 'pages#show'

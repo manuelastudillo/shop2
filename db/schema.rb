@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227215159) do
+ActiveRecord::Schema.define(version: 20170301012902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,50 @@ ActiveRecord::Schema.define(version: 20170227215159) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
+
+  create_table "items", force: :cascade do |t|
+    t.string   "nombre"
+    t.string   "codigo"
+    t.string   "comision"
+    t.string   "descuento"
+    t.integer  "precio_venta"
+    t.string   "precio_compra"
+    t.string   "foto"
+    t.integer  "proveedor_id"
+    t.string   "descripcion"
+    t.integer  "brand_id"
+    t.integer  "unit_id"
+    t.integer  "category_id"
+    t.integer  "stock"
+    t.integer  "min_stock"
+    t.integer  "precio"
+    t.string   "slug"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "items", ["brand_id"], name: "index_items_on_brand_id", using: :btree
+  add_index "items", ["category_id"], name: "index_items_on_category_id", using: :btree
+  add_index "items", ["proveedor_id"], name: "index_items_on_proveedor_id", using: :btree
+  add_index "items", ["unit_id"], name: "index_items_on_unit_id", using: :btree
+
+  create_table "proveedors", force: :cascade do |t|
+    t.string   "nombre"
+    t.string   "razon_social"
+    t.string   "rut"
+    t.string   "domicilio"
+    t.integer  "telegono1"
+    t.integer  "telefono2"
+    t.integer  "web"
+    t.integer  "mail"
+    t.string   "descripcion"
+    t.string   "slug"
+    t.integer  "comuna_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "proveedors", ["comuna_id"], name: "index_proveedors_on_comuna_id", using: :btree
 
   create_table "provincias", force: :cascade do |t|
     t.string   "nombre"
@@ -83,6 +127,11 @@ ActiveRecord::Schema.define(version: 20170227215159) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "comunas", "provincias"
+  add_foreign_key "items", "brands"
+  add_foreign_key "items", "categories"
+  add_foreign_key "items", "proveedors"
+  add_foreign_key "items", "units"
+  add_foreign_key "proveedors", "comunas"
   add_foreign_key "provincias", "regiones", column: "region_id"
   add_foreign_key "users", "comunas"
 end

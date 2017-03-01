@@ -1,0 +1,57 @@
+<%= form_for(@proveedor) do |f| %>
+  <% if @proveedor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@proveedor.errors.count, "error") %> prohibited this proveedor from being saved:</h2>
+
+      <ul>
+      <% @proveedor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :razon_social %><br>
+    <%= f.text_field :razon_social %>
+  </div>
+  <div class="field">
+    <%= f.label :rut %><br>
+    <%= f.text_field :rut %>
+  </div>
+  <div class="field">
+    <%= f.label :domicilio %><br>
+    <%= f.text_field :domicilio %>
+  </div>
+  <div class="field">
+    <%= f.label :telegono1 %><br>
+    <%= f.number_field :telegono1 %>
+  </div>
+  <div class="field">
+    <%= f.label :telefono2 %><br>
+    <%= f.number_field :telefono2 %>
+  </div>
+  <div class="field">
+    <%= f.label :web %><br>
+    <%= f.number_field :web %>
+  </div>
+  <div class="field">
+    <%= f.label :mail %><br>
+    <%= f.number_field :mail %>
+  </div>
+  <div class="field">
+    <%= f.label :descripcion %><br>
+    <%= f.text_field :descripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :comuna_id %><br>
+    <%= f.text_field :comuna_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
